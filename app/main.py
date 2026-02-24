@@ -1,15 +1,16 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from .models import UserCreateRequest, UserResponse
+from .service import UserService
 
 app = FastAPI()
 
-class ChatRequest(BaseModel):
-    message: str
-    temperature: float
+user_service = UserService()
 
-class ChatResponse(BaseModel):
-    reply: str
 
-@app.post("/chat", response_model=ChatResponse)
-def chat(req: ChatRequest) -> ChatResponse:
-    return ChatResponse(reply=f"Echo: {req.message}")
+@app.post("/users", response_model=UserResponse)
+def create_user(req: UserCreateRequest) -> UserResponse:
+    return user_service.create_user(
+        name=req.name,
+        age=req.age,
+        role=req.role
+    )
