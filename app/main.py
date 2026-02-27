@@ -9,8 +9,12 @@ user_service = UserService()
 
 @app.post("/users", response_model=UserResponse)
 def create_user(req: UserCreateRequest) -> UserResponse:
-    return user_service.create_user(
+    return create_user(
         name=req.name,
         age=req.age,
         role=req.role
     )
+
+@app.get("/greet")
+async def hello():
+    return "Hello There"
