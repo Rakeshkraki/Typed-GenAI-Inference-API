@@ -12,6 +12,7 @@ def create_user(req: UserCreateRequest) -> UserResponse:
     return user_service.create_user(
         name=req.name,
         age=req.age,
+        email=req.email,
         role=req.role
     )
 
