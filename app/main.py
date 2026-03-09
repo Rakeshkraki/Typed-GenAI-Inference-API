@@ -1,3 +1,5 @@
+from typing import Any, Generator
+
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
@@ -12,7 +14,7 @@ user_service = UserService()
 
 Base.metadata.create_all(bind=engine)
 
-def get_db() -> Session:
+def get_db() -> Generator[Any, Any, None]:
     db = SessionLocal()
     try:
         yield db
