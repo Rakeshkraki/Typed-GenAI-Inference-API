@@ -16,7 +16,8 @@ class Car(Vehicle):
         print(f"car is starting")
 
     def stop(self):
-        print(f"car is stopped")
+        #print(f"car is stopped")
+        pass
         
 supra = Car()
-supra.start()
+#supra.start()
