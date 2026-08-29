@@ -1,4 +1,11 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
 class InvalidAgeError(Exception):
+    pass
+
+class InvalidAmount(Exception):
     pass
 
 def validate_age(age: int):
@@ -23,3 +30,20 @@ def multiple_exception() -> None:
         print(f"result {result}")
     finally:
         print("running completed...")
+
+
+def debt_amt(amount : int):
+    try:
+        validate_payment(amount)
+    except InvalidAmount as e:
+        logger.exception(f"payment failed : {e}")
+    else:
+        print("payment successful")
+    finally:
+        print("requested transaction transaction completed ")
+
+def validate_payment(amount : int):
+    if amount <= 0:
+        raise InvalidAmount("amount can't be less than 0")
+
+debt_amt(0)
